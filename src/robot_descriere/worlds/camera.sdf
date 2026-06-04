@@ -1,0 +1,180 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="camera">
+
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation><range>1000</range><constant>0.9</constant><linear>0.01</linear><quadratic>0.001</quadratic></attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision"><geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry></collision>
+        <visual name="visual"><geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry><material><ambient>0.8 0.8 0.8 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <model name="perete_nord"><static>true</static><pose>0 4 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>8 0.2 1</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>8 0.2 1</size></box></geometry><material><ambient>0.9 0.9 0.9 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <model name="perete_sud"><static>true</static><pose>0 -4 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>8 0.2 1</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>8 0.2 1</size></box></geometry><material><ambient>0.9 0.9 0.9 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <model name="perete_est"><static>true</static><pose>4 0 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.2 8 1</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.2 8 1</size></box></geometry><material><ambient>0.9 0.9 0.9 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <model name="perete_vest"><static>true</static><pose>-4 0 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.2 8 1</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.2 8 1</size></box></geometry><material><ambient>0.9 0.9 0.9 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <model name="obstacol_1"><static>true</static><pose>2 1.5 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.5 0.5 1</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.5 0.5 1</size></box></geometry><material><ambient>0.2 0.2 0.8 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <model name="obstacol_2"><static>true</static><pose>-2 -1.5 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision"><geometry><box><size>0.5 0.5 1</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.5 0.5 1</size></box></geometry><material><ambient>0.8 0.2 0.2 1</ambient></material></visual>
+      </link>
+    </model>
+
+    <!-- ROBOT ASPIRATOR -->
+    <model name="robot_aspirator">
+      <pose>0 0 0.1 0 0 0</pose>
+
+      <link name="base_link">
+        <pose>0 0 0.05 0 0 0</pose>
+        <inertial>
+          <mass>1.5</mass>
+          <inertia><ixx>0.01247</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0.01247</iyy><iyz>0</iyz><izz>0.02168</izz></inertia>
+        </inertial>
+        <collision name="collision"><geometry><cylinder><radius>0.17</radius><length>0.1</length></cylinder></geometry></collision>
+        <visual name="visual"><geometry><cylinder><radius>0.17</radius><length>0.1</length></cylinder></geometry><material><ambient>0 0 0.8 1</ambient></material></visual>
+        <sensor name="imu_sensor" type="imu">
+          <always_on>true</always_on><update_rate>100</update_rate><topic>/imu</topic>
+          <imu>
+            <angular_velocity>
+              <x><noise type="gaussian"><mean>0</mean><stddev>0.009</stddev></noise></x>
+              <y><noise type="gaussian"><mean>0</mean><stddev>0.009</stddev></noise></y>
+              <z><noise type="gaussian"><mean>0</mean><stddev>0.009</stddev></noise></z>
+            </angular_velocity>
+            <linear_acceleration>
+              <x><noise type="gaussian"><mean>0</mean><stddev>0.021</stddev></noise></x>
+              <y><noise type="gaussian"><mean>0</mean><stddev>0.021</stddev></noise></y>
+              <z><noise type="gaussian"><mean>0</mean><stddev>0.021</stddev></noise></z>
+            </linear_acceleration>
+          </imu>
+        </sensor>
+      </link>
+
+      <link name="roata_stanga">
+        <pose>0 0.12 0.0 1.5708 0 0</pose>
+        <inertial><mass>0.1</mass><inertia><ixx>0.00008125</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0.00008125</iyy><iyz>0</iyz><izz>0.000125</izz></inertia></inertial>
+        <collision name="collision"><geometry><cylinder><radius>0.05</radius><length>0.04</length></cylinder></geometry></collision>
+        <visual name="visual"><geometry><cylinder><radius>0.05</radius><length>0.04</length></cylinder></geometry><material><ambient>0.1 0.1 0.1 1</ambient></material></visual>
+      </link>
+      <joint name="motor_stanga" type="revolute">
+        <parent>base_link</parent><child>roata_stanga</child>
+        <axis><xyz>0 0 1</xyz><limit><lower>-1e16</lower><upper>1e16</upper></limit></axis>
+      </joint>
+
+      <link name="roata_dreapta">
+        <pose>0 -0.12 0.0 1.5708 0 0</pose>
+        <inertial><mass>0.1</mass><inertia><ixx>0.00008125</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0.00008125</iyy><iyz>0</iyz><izz>0.000125</izz></inertia></inertial>
+        <collision name="collision"><geometry><cylinder><radius>0.05</radius><length>0.04</length></cylinder></geometry></collision>
+        <visual name="visual"><geometry><cylinder><radius>0.05</radius><length>0.04</length></cylinder></geometry><material><ambient>0.1 0.1 0.1 1</ambient></material></visual>
+      </link>
+      <joint name="motor_dreapta" type="revolute">
+        <parent>base_link</parent><child>roata_dreapta</child>
+        <axis><xyz>0 0 1</xyz><limit><lower>-1e16</lower><upper>1e16</upper></limit></axis>
+      </joint>
+
+      <link name="roata_sprijin">
+        <pose>-0.13 0 0.025 0 0 0</pose>
+        <inertial><mass>0.05</mass><inertia><ixx>0.0000125</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0.0000125</iyy><iyz>0</iyz><izz>0.0000125</izz></inertia></inertial>
+        <collision name="collision"><geometry><sphere><radius>0.025</radius></sphere></geometry></collision>
+        <visual name="visual"><geometry><sphere><radius>0.025</radius></sphere></geometry><material><ambient>1 1 1 1</ambient></material></visual>
+      </link>
+      <joint name="prindere_sprijin" type="fixed"><parent>base_link</parent><child>roata_sprijin</child></joint>
+
+      <link name="laser_frame">
+        <pose>0 0 0.21 0 0 0</pose>
+        <inertial><mass>0.17</mass><inertia><ixx>0.000099</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0.000099</iyy><iyz>0</iyz><izz>0.000136</izz></inertia></inertial>
+        <collision name="collision"><geometry><cylinder><radius>0.04</radius><length>0.06</length></cylinder></geometry></collision>
+        <visual name="visual"><geometry><cylinder><radius>0.04</radius><length>0.06</length></cylinder></geometry><material><ambient>1 0 0 1</ambient></material></visual>
+        <sensor name="lidar_sensor" type="gpu_lidar">
+          <pose>0 0 0 0 0 0</pose>
+          <visualize>true</visualize>
+          <update_rate>10</update_rate>
+          <topic>/scan</topic>
+          <frame_id>laser_frame</frame_id>
+          <lidar>
+            <scan>
+              <horizontal>
+                <samples>360</samples><resolution>1</resolution>
+                <min_angle>-3.14159</min_angle><max_angle>3.14159</max_angle>
+              </horizontal>
+            </scan>
+            <range><min>0.15</min><max>12.0</max><resolution>0.01</resolution></range>
+            <noise><type>gaussian</type><mean>0.0</mean><stddev>0.01</stddev></noise>
+          </lidar>
+        </sensor>
+      </link>
+      <joint name="laser_joint" type="fixed"><parent>base_link</parent><child>laser_frame</child></joint>
+
+      <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+        <left_joint>motor_stanga</left_joint>
+        <right_joint>motor_dreapta</right_joint>
+        <wheel_separation>0.24</wheel_separation>
+        <wheel_radius>0.05</wheel_radius>
+        <topic>/cmd_vel</topic>
+        <odom_topic>/odom</odom_topic>
+        <frame_id>odom</frame_id>
+        <child_frame_id>base_link</child_frame_id>
+        <odom_publish_frequency>30</odom_publish_frequency>
+      </plugin>
+
+      <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+        <joint_name>motor_stanga</joint_name>
+        <joint_name>motor_dreapta</joint_name>
+      </plugin>
+
+    </model>
+
+  </world>
+</sdf>

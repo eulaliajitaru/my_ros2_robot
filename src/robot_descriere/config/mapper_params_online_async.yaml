@@ -1,0 +1,24 @@
+slam_toolbox:
+  ros__parameters:
+
+    # Parametrii de rezolvare (Solvers)
+    solver_plugin: solver_plugins::CeresSolver
+    ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
+    ceres_preconditioner: SCHUR_JACOBI
+    ceres_trust_strategy: LEVENBERG_MARQUARDT
+    ceres_dogleg_type: TRADITIONAL_DOGLEG
+    ceres_loss_function: None
+
+    # ROS Parameters (Cadrele de referință)
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_link
+    scan_topic: /scan
+    use_map_saver: true
+    mode: mapping
+
+    # SLAM Parameters (Fine-tuning)
+    distance_threshold: 0.1
+    angle_threshold: 0.1
+    update_rate: 1.0
+    max_laser_range: 12.0
