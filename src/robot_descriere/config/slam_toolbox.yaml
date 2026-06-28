@@ -1,0 +1,40 @@
+slam_toolbox:
+  ros__parameters:
+
+    # ---- Solver ----
+    solver_plugin: solver_plugins::CeresSolver
+    ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
+    ceres_preconditioner: SCHUR_JACOBI
+    ceres_trust_strategy: LEVENBERG_MARQUARDT
+    ceres_dogleg_type: TRADITIONAL_DOGLEG
+    ceres_loss_function: None
+
+    # ---- Cadre de referinta (TF frames) ----
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_link
+    scan_topic: /scan
+
+    # ---- Timp simulat (obligatoriu cu Gazebo) ----
+    use_sim_time: true
+
+    # ---- Mod de operare ----
+    use_map_saver: true
+    mode: mapping             # 'mapping' pentru cartografiere, 'localization' dupa ce harta e salvata
+
+    # ---- Praguri de actualizare harta ----
+    # Adauga un nou nod in graf doar daca robotul s-a miscat suficient
+    distance_threshold: 0.1   # metri
+    angle_threshold: 0.1      # radiani (~5.7 grade)
+    update_rate: 1.0          # Hz
+
+    # ---- LiDAR ----
+    max_laser_range: 12.0     # metri (RPLIDAR A1 are max 12m)
+    minimum_time_interval: 0.5
+    transform_timeout: 0.2
+    tf_buffer_duration: 30.0
+
+    # ---- Optimizari pentru performanta pe Raspberry Pi ----
+    resolution: 0.05          # 5cm per pixel in harta
+    max_iterations: 1000
+    enable_interactive_mode: false

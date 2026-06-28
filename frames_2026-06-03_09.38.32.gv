@@ -1,0 +1,13 @@
+digraph G {
+"base_link" -> "roata_dreapta"[label=" Broadcaster: default_authority\nAverage rate: 60.197\nBuffer length: 4.668\nMost recent transform: 780.172\nOldest transform: 775.504\n"];
+"odom" -> "base_link"[label=" Broadcaster: default_authority\nAverage rate: 29.784\nBuffer length: 2.686\nMost recent transform: 780.164\nOldest transform: 777.478\n"];
+"base_link" -> "roata_stanga"[label=" Broadcaster: default_authority\nAverage rate: 60.197\nBuffer length: 4.668\nMost recent transform: 780.172\nOldest transform: 775.504\n"];
+"base_link" -> "imu_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "laser_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "roata_sprijin"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"map" -> "odom"[label=" Broadcaster: default_authority\nAverage rate: 9.787\nBuffer length: 4.7\nMost recent transform: 780.3\nOldest transform: 775.6\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1780479512.6441984"[ shape=plaintext ] ;
+}->"map";
+}

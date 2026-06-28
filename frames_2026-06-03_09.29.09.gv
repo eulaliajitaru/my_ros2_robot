@@ -1,0 +1,11 @@
+digraph G {
+"base_link" -> "roata_dreapta"[label=" Broadcaster: default_authority\nAverage rate: 38.377\nBuffer length: 4.56\nMost recent transform: 315.983\nOldest transform: 311.423\n"];
+"base_link" -> "roata_stanga"[label=" Broadcaster: default_authority\nAverage rate: 38.377\nBuffer length: 4.56\nMost recent transform: 315.983\nOldest transform: 311.423\n"];
+"base_link" -> "imu_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "laser_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "roata_sprijin"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1780478949.118003"[ shape=plaintext ] ;
+}->"base_link";
+}

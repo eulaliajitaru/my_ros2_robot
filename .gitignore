@@ -49,3 +49,12 @@ qtcreator-*
 
 # Catkin custom files
 CATKIN_IGNORE
+
+.vscode/
+*.db
+build/
+install/
+log/
+__pycache__/
+*.pyc
+src/robot_descriere/urdf/.vscode/browse.vc.db
